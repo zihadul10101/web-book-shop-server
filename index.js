@@ -26,24 +26,10 @@ client.connect(err => {
     //   console.log('Database connected successfully');
 
 
-    // app.get('/orders', (req, res) => {
-    //     bookCollection.find()
-    //         .toArray((err, items) => {
-    //             // console.log('from database',items);
-    //             res.send(items);
-    //         })
-    // })
+   
 
 
-    // app.post('/orderHistory', (req, res) => {
-    //     const orderHistory = req.body;
-    //     bookCollection.insertOne(orderHistory)
-    //         .then(result => {
-    //             res.send(result.insertedCount > 0);
-    //         })
-
-    //     console.log(orderHistory);
-    // })
+   
 
 
     app.get('/books', (req, res) => {
