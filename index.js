@@ -23,6 +23,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
     console.log('connection err', err);
     const bookCollection = client.db("webbook").collection("storebook");
+    const orderCollection = client.db("webbook").collection("storeorder");
     //   console.log('Database connected successfully');
 
 
@@ -30,12 +31,20 @@ client.connect(err => {
     app.post('/addOrdering', (req, res) => {
         const newOrdering = req.body;
 
-        bookCollection.insertOne(newOrdering)
+        orderCollection.insertOne(newOrdering)
             .then(result => {
                
                 res.send(result.insertedCount > 0);
             })
             console.log(newOrdering);
+    })
+
+    app.get('/orderDetails', (req, res) =>{
+        console.log(req.query.email)
+        orderCollection.find({email:req.query.email})
+        .toArray((err, documents) =>{
+            res.send(documents)
+        })
     })
 
 
