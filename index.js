@@ -26,11 +26,22 @@ client.connect(err => {
     //   console.log('Database connected successfully');
 
 
-   
+
+    app.post('/addOrdering', (req, res) => {
+        const newOrdering = req.body;
+
+        bookCollection.insertOne(newOrdering)
+            .then(result => {
+               
+                res.send(result.insertedCount > 0);
+            })
+            console.log(newOrdering);
+    })
 
 
-   
-
+    app.get('/', (req, res) => {
+        res.send("hello wellcome web book house")
+    })
 
     app.get('/books', (req, res) => {
         bookCollection.find()
@@ -61,6 +72,6 @@ client.connect(err => {
     //   client.close();
 });
 
-app.listen(process.env.PORT ||port)
+app.listen(process.env.PORT || port)
 
 
